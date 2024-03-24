@@ -1,0 +1,28 @@
+name: Build and Test
+
+on:
+  push:
+
+jobs:
+  buildandtest:
+   runs-on: ubuntu-latest
+   steps:
+     - name: Checkout Code
+       uses: actions/checkout@v4
+     - name: Build BootJar
+       run: ./gradlew bootJar
+     - uses: docker/setup-buildx-action@v3
+     - uses: docker/build-push-action@v5
+       with:
+         context: .
+         file: "Dockerfile"
+         tags: rademo:latest
+         load: true
+         cache-from: type=gha
+         cache-to: type=gha,mode=max
+         push: false
+     - name: Run Rest Assured Tests
+       uses: addnab/docker-run-action@v3
+       with:
+         image: rademo:latest
+         run: ./gradlew test

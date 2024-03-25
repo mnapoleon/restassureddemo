@@ -29,4 +29,5 @@ jobs:
        uses: addnab/docker-run-action@v3
        with:
          image: rademo:latest
-         run: ./gradlew test
+     - name: Run Test
+       run: ./gradlew test

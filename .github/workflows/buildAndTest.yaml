@@ -29,5 +29,10 @@ jobs:
        uses: addnab/docker-run-action@v3
        with:
          image: rademo:latest
+     - name: Setup Java
+       uses: actions/setup-java@v4
+       with:
+         distribution: 'temurin' # See 'Supported distributions' for available options
+         java-version: '21'
      - name: Run Test
        run: ./gradlew test

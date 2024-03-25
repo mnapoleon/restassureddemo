@@ -23,6 +23,8 @@ jobs:
          cache-from: type=gha
          cache-to: type=gha,mode=max
          push: false
+     - name: Setup Gradle
+       uses: gradle/gradle-build-action@v3
      - name: Run Rest Assured Tests
        uses: addnab/docker-run-action@v3
        with:
